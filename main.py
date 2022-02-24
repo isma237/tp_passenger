@@ -23,37 +23,37 @@ response="m"
 #---------------------------------FONCTIONS DEFINITION--------------------------------
 def createBus(): #creation d'un bus
     response=''
-    print("___________Create a new Bus___________")
+    print("___________Creer un nouveau bus___________")
     while response != 'n':
         print()
         currentBus = copy.deepcopy(busTemp)
-        currentBus["id"] = input("==> Enter the bus ID :  ").lower()
+        currentBus["id"] = input("==> Entrer l'ID du bus :  ").lower()
         for bus in myListBus:
             while bus["id"]==currentBus["id"]:
-                print("another bus has already the same ID")
-                currentBus["id"]=input("    Enter the bus ID:  ").lower()
-        currentBus["availablePlace"] = int(input("    Enter the possible seat :  "))
+                print("    un autre bus a deja le meme ID")
+                currentBus["id"]=input("    Entrer l'ID du bus :  ").lower()
+        currentBus["availablePlace"] = int(input("    Entrer le nombre de siege :  "))
         myListBus.append(currentBus)
-        response = input("create another bus ? y/n___  ")
+        response = input("creer un autre bus ?  y/n___  ")
         while response != 'n' and response != 'y':
-            response = input("create another bus ? y:yes or n:no___  ")
+            response = input("creer un autre bus ?  y:yes or n:no___  ")
         print("------------------------------------------------------------")
     
 def createPassenger(): #creation d'un passager
     
     response = ''
     id=0
-    print("___________Create a new Passenger__________")
+    print("___________Creer un nouveau passager__________")
     while response != 'n':
         print()
         currentPassenger = copy.deepcopy(passengerTemp)
-        currentPassenger["name"] = input("==> Entrer his name :  ").lower()
+        currentPassenger["name"] = input("==> Entrer son nom :  ").lower()
         for char in currentPassenger["name"]:
             id += ord(char)
         currentPassenger["id"] =str(id)
-        currentPassenger["lgageWeight"] = float(input("    Lugage weight :  "))
+        currentPassenger["lgageWeight"] = float(input("    Poids des bagages :  "))
         myVacanPassgerList.append(currentPassenger)
-        response = input("create anaother passenger ?y/n__  ")
+        response = input("creer un autre passager ?y/n__  ")
         print("------------------------------------------------------------")
 
 def addPassengerInBus(passengerName , busId): #ajout d'un passager dans un bus
@@ -106,9 +106,9 @@ def movePassengerInBus(passengerName , busId):
     if status1 == 1 and status2 == 0:
         print("==> il n'existe pas d'utilisateur de ce nom enregistre dans ce bus")
     elif status2==0:
-        print("==> the name entred in incorrect")
+        print("==> le nom du passager renseigner est incorrect")
     elif status1==0:
-        print("==> the bus id entred in incorrect") 
+        print("==> l'ID du bus renseigner est incorrect") 
 
     
 def printVacanListPassger(): #liste des passager vacans
@@ -116,11 +116,15 @@ def printVacanListPassger(): #liste des passager vacans
         print("==>  ID : {}   Name :  {}   Lugage weight :  {}".format(passger["id"],passger["name"].capitalize(),passger["lgageWeight"]))
 
 def printBuspassgerList(busId):#liste des passger dans un bus specifique
+    count = 0
     for bus in myListBus:
         if bus["id"] == busId:
             passengers=bus["listPassenger"]
             for passger in passengers:
                 print("==>  ID : {}   Name :  {}   Lugage weight :  {}".format(passger["id"],passger["name"].capitalize(),passger["lgageWeight"]))
+                count += 1
+    if count == 0:
+        print("==> Il n'ya aucun passager dans ce bus ")
 
 def allBusInfo():
     print("___________Information sur tous les bus ____________")
@@ -199,7 +203,7 @@ def myswitcher(choix):
             print()
             id = input("==> Entrer l'id du bus :  ")
             print()
-            print("______________Tous les bus enregistree_______________")
+            print("______________Tous les passagers vacans_______________")
             print()
             printVacanListPassger()
             name = input("==> Entrer le nom du passager a ajouter :  ")
@@ -209,7 +213,7 @@ def myswitcher(choix):
         #allBusInfo()
         response="r"
         print()
-        print("______________Tous les passagers vacans_______________")
+        print("______________Tous les bus enregistree_______________")
         print()
         while response =="r":
             for bus in myListBus:
@@ -217,7 +221,7 @@ def myswitcher(choix):
             print()
             id = input("==> Entrer l'id du bus :  ")
             print()
-            print("______________Tous les bus enregistree_______________")
+            print("______________Tous les passagers de ce bus_______________")
             print()
             printBuspassgerList(id)
             name = input("==> Entrer le nom du passager a retirer :  ")
