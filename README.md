@@ -17,7 +17,6 @@
 *Les informations ci-dessous seront complétées par **vous** si necessaire*
 
 **Passager**
-<p>Un passage est identifié par les trois propriétés suivantes</p>
 - Un identifiant qui doit être unique
 - Un nom
 - Le poids de ses bagages
