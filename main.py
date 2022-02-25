@@ -72,7 +72,16 @@ def removePassengerInBus(bus, passenger):
 addPassengerInBus(hawaou, lt530)
 addPassengerInBus(morelle, lt530)
 removePassengerInBus(lt545, hawaou)
-print(lt530)
+
+def listPassengerInBus(bus):
+    passengers = bus["passengers"]
+    for passenger in passengers:
+        print(passenger["name"])
+   
+listPassengerInBus(lt530)
+
+
+
 
 def getTotalWeightInBus(bus):
     passengers = bus['passengers']
