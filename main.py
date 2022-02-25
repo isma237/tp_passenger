@@ -12,12 +12,14 @@ passengerModel = {
 }
 
 allPassengers = []
+allBuses = []
 
 #Création d'un bus
 def createBus(id, nombre_place):
     currentBus = copy.deepcopy(busModel)
     currentBus['id'] = id
     currentBus['place_available'] = nombre_place
+    allBuses.append(currentBus)
     return currentBus
 
 #Création d'un passager
@@ -41,8 +43,9 @@ def checkIfUserNotExist(identifiant, table):
     return True
 
 
-lt530 = createBus("LT530", 5)
 lt545 = createBus("LT545", 50)
+lt530 = createBus("LT530", 5)
+lt500 = createBus("LT500", 50)
 
 hawaou = createPassenger("696273789", "Hawaou", 22)
 morelle = createPassenger("694412340", "Morelle", 20)
@@ -71,17 +74,13 @@ def removePassengerInBus(bus, passenger):
 
 addPassengerInBus(hawaou, lt530)
 addPassengerInBus(morelle, lt530)
-removePassengerInBus(lt545, hawaou)
 
-def listPassengerInBus(bus):
+def listPassengerInBus(bus):      
     passengers = bus["passengers"]
     for passenger in passengers:
         print(passenger["name"])
    
 listPassengerInBus(lt530)
-
-
-
 
 def getTotalWeightInBus(bus):
     passengers = bus['passengers']
@@ -91,5 +90,18 @@ def getTotalWeightInBus(bus):
 
     return totalWeight
 
-
 total = getTotalWeightInBus(lt530)
+
+def checkIfPassengerPresentInBus(identifiant):
+    exist = False
+    for bus in  allBuses:
+        for passenger in bus['passengers']:
+            if passenger['id'] == identifiant:
+                exist = True
+                print(passenger)
+                print(bus)
+                break
+        if exist:
+            break
+
+checkIfPassengerPresentInBus("696273789")
